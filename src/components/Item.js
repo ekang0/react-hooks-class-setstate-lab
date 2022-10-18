@@ -1,5 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 
+class Item extends React.Component {
+  state = { 
+    isInCart: false,
+  };
+
+  handleAddToCartClick = () => {
+    this.setState((prevState) => ({
+      isInCart: !prevState.isInCart,
+    }));
+  };
+
+  render() {
+    return (
+      <li className={this.state.isInCart ? "in-cart" : ""}>
+        <span>{this.name}</span>
+        <span className="category">{this.category}</span>
+        <button
+          className={this.state.isInCart ? "remove" : "add"}
+          onClick={this.handleAddToCartClick}
+        >
+          {this.state.isInCart ? "Remove From" : "Add to"} Cart
+        </button>
+      </li>
+    );
+  }
+};
+
+
+/*
 function Item({ name, category }) {
   const [isInCart, setIsInCart] = useState(false);
 
@@ -20,5 +49,6 @@ function Item({ name, category }) {
     </li>
   );
 }
+*/
 
 export default Item;
